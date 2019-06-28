@@ -3,6 +3,8 @@ import 'constants.dart';
 
 class IconContent extends StatelessWidget {
   IconContent({@required this.icon, this.text});
+  // when you have a constructor, it's a good idea to mark the parameter as
+  // required so there will be no unnecessary errors
 
   final IconData icon;
   final String text;

@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+// when you have a lot of constants style that is used throughout the file
+// it's a great idea to have all of them gathered in 1 file
+// so it's easier to organize
+
 const kLabelTextStyle = TextStyle(
   fontSize: 18.0,
   color: Color(0xFFFFFFFF),

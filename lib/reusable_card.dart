@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+// when you have widgets that are used in multiple places, it's a good idea to extract
+// the widget into it's own class
+
 class ReusableCard extends StatelessWidget {
   ReusableCard({@required this.colour, this.cardChild, this.onPress});
 

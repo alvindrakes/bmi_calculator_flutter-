@@ -3,10 +3,16 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'reusable_card.dart';
 import 'icon_content.dart';
 import 'constants.dart';
+import 'round_icon_button.dart';
+import 'package:bmi_calculator/ResultPage.dart';
 
 enum Gender { Male, Female }
+// instead of using true or false to compare
+// conditionals, it is better to use enum, which improve code readability
 
 int height = 180;
+int weight = 80;
+int age = 20;
 
 class InputPage extends StatefulWidget {
   @override
@@ -17,6 +23,7 @@ class _InputPageState extends State<InputPage> {
   Color maleCardColour = kInactiveCardColour;
   Color femaleCardColour = kInactiveCardColour;
 
+  // besides if-else statements, we can use dart ternary operators to simplify it
   void updateColour(Gender selectedGender) {
     selectedGender == Gender.Male
         ? maleCardColour = kActiveCardColour
@@ -120,15 +127,110 @@ class _InputPageState extends State<InputPage> {
             Expanded(
                 child: Row(
               children: <Widget>[
-                Expanded(child: ReusableCard(colour: kActiveCardColour)),
-                Expanded(child: ReusableCard(colour: kActiveCardColour)),
+                Expanded(
+                    child: ReusableCard(
+                  colour: kActiveCardColour,
+                  cardChild: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        'Weight',
+                        style: kLabelTextStyle,
+                      ),
+                      Text(
+                        weight.toString(),
+                        style: kNumberTextStyle,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          RoundIconButton(
+                            icon: FontAwesomeIcons.minus,
+                            onPressed: () {
+                              setState(() {
+                                weight--;
+                              });
+                            },
+                          ),
+                          SizedBox(
+                            width: 10.0,
+                          ),
+                          RoundIconButton(
+                            icon: FontAwesomeIcons.plus,
+                            onPressed: () {
+                              setState(() {
+                                weight++;
+                              });
+                            },
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                )),
+                Expanded(
+                    child: ReusableCard(
+                  colour: kActiveCardColour,
+                  cardChild: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        'Age',
+                        style: kLabelTextStyle,
+                      ),
+                      Text(
+                        age.toString(),
+                        style: kNumberTextStyle,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          RoundIconButton(
+                            icon: FontAwesomeIcons.minus,
+                            onPressed: () {
+                              setState(() {
+                                age--;
+                              });
+                            },
+                          ),
+                          SizedBox(
+                            width: 10.0,
+                          ),
+                          RoundIconButton(
+                            icon: FontAwesomeIcons.plus,
+                            onPressed: () {
+                              setState(() {
+                                age++;
+                              });
+                            },
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                )),
               ],
             )),
-            Container(
-              color: kBottomContainerColour,
-              height: kBottomContainerHeight,
-              width: double.infinity,
-              margin: EdgeInsets.all(10.0),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    // if there's more that 1 page in app, it's better to define
+                    // all routes in main.dart file
+                    MaterialPageRoute(builder: (context) => ResultPage()));
+              },
+              child: Container(
+                padding: EdgeInsets.all(20.0),
+                child: Text(
+                  'CALCULATE',
+                  style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.w700),
+                  textAlign: TextAlign.center,
+                ),
+                color: kBottomContainerColour,
+                height: kBottomContainerHeight,
+                width: double.infinity,
+                margin: EdgeInsets.all(10.0),
+              ),
             )
           ],
         ));
