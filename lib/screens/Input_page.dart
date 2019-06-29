@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'reusable_card.dart';
-import 'icon_content.dart';
-import 'constants.dart';
-import 'round_icon_button.dart';
-import 'package:bmi_calculator/ResultPage.dart';
+import 'package:bmi_calculator/components/reusable_card.dart';
+import 'package:bmi_calculator/components/icon_content.dart';
+import 'package:bmi_calculator/constants.dart';
+import 'package:bmi_calculator/components/round_icon_button.dart';
+import 'package:bmi_calculator/screens/result_page.dart';
+import 'package:bmi_calculator/components/bottom_button.dart';
 
 enum Gender { Male, Female }
 // instead of using true or false to compare
@@ -211,26 +212,15 @@ class _InputPageState extends State<InputPage> {
                 )),
               ],
             )),
-            GestureDetector(
+            BottomButton(
+              label: 'CALCULATE',
               onTap: () {
                 Navigator.push(
                     context,
-                    // if there's more that 1 page in app, it's better to define
-                    // all routes in main.dart file
-                    MaterialPageRoute(builder: (context) => ResultPage()));
+                    MaterialPageRoute(
+                      builder: (context) => ResultPage(),
+                    ));
               },
-              child: Container(
-                padding: EdgeInsets.all(20.0),
-                child: Text(
-                  'CALCULATE',
-                  style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.w700),
-                  textAlign: TextAlign.center,
-                ),
-                color: kBottomContainerColour,
-                height: kBottomContainerHeight,
-                width: double.infinity,
-                margin: EdgeInsets.all(10.0),
-              ),
             )
           ],
         ));
