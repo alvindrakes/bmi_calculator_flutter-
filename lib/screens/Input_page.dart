@@ -6,14 +6,11 @@ import 'package:bmi_calculator/constants.dart';
 import 'package:bmi_calculator/components/round_icon_button.dart';
 import 'package:bmi_calculator/screens/result_page.dart';
 import 'package:bmi_calculator/components/bottom_button.dart';
+import 'package:bmi_calculator/calculator_brain.dart';
 
 enum Gender { Male, Female }
 // instead of using true or false to compare
 // conditionals, it is better to use enum, which improve code readability
-
-int height = 180;
-int weight = 80;
-int age = 20;
 
 class InputPage extends StatefulWidget {
   @override
@@ -33,6 +30,10 @@ class _InputPageState extends State<InputPage> {
         ? femaleCardColour = kActiveCardColour
         : femaleCardColour = kInactiveCardColour;
   }
+
+  int height = 180;
+  int weight = 80;
+  int age = 20;
 
   @override
   Widget build(BuildContext context) {
@@ -215,10 +216,22 @@ class _InputPageState extends State<InputPage> {
             BottomButton(
               label: 'CALCULATE',
               onTap: () {
+                CalculatorBrain calc =
+                    CalculatorBrain(height: height, weight: weight);
+
+                print(calc.weight);
+                print(calc.height);
+
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => ResultPage(),
+                      builder: (context) => ResultPage(
+                            // the sequence of code is so important
+                            // but it can also cause hard to spot bugs !
+                            bmiResult: calc.calculateBMI(),
+                            resultText: calc.getResult(),
+                            interpretationText: calc.getInterpretation(),
+                          ),
                     ));
               },
             )
