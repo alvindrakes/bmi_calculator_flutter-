@@ -1,5 +1,5 @@
 
-# BMI Calculator 💪
+# flutter_bmi_calculator 💪
 - a simple BMI calculator 
 
 ## App functions 
